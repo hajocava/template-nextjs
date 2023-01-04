@@ -1,4 +1,4 @@
-# Website
+# Template Next JS
 
 Para correr el proyecto es necesario tener docker desktop instalado.
 
