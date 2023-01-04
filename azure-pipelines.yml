@@ -1,0 +1,35 @@
+trigger:
+  branches:
+    include:
+    - develop
+
+variables:
+  - name: AGENT_POOL
+    value: Default
+  - group: group-variables
+  - group: website
+  - name: SERVICE_NAME
+    value: 'website'
+  - name: DOCKER_BUILD_ARGS
+    value: ''
+  - name: HELM_CHART_PATH
+    value: 'truehome/website'
+  - name: DOCKER_PATH
+    value: ''
+  - name: ENABLE_TEST
+    value: false
+  - name : ENABLE_SONARQUBE_SCANNER
+    value: false
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: ArquitectureCode/azure-pipelines
+      ref: refs/tags/v0.1.0-alpha
+
+stages:
+  - template: templates/code-analysis.yml@templates
+  - template: templates/build.yml@templates
+  - template: templates/test.yml@templates
+  - template: templates/deploy.yml@templates
